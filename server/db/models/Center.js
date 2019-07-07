@@ -6,6 +6,10 @@ const Center = db.define('center', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   zone: {
     type: Sequelize.STRING,
     allowNull: false

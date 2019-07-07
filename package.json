@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start-server": "nodemon server/main.js",
+    "seed": "node ./bin/seed.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Benito J. Suriano",
