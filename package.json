@@ -11,7 +11,11 @@
   "author": "Benito J. Suriano",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "chalk": "^2.4.2",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "path": "^0.12.7",
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.9.3"
