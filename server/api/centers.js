@@ -76,3 +76,28 @@ router.get(`/:centerId/ght-rollformer`, async (req, res, next) => {
     next(error)
   }
 })
+
+// GET /api/centers/:centerId/forklift
+router.get(`/:centerId/forklift`, async (req, res, next) => {
+  const { centerId } = req.params
+
+  try {
+    const rfm = await Forklift.findOne({
+      where: {
+        centerId: centerId
+      },
+      include: [{
+        model: Center
+      }]
+    })
+
+    if(!rfm) {
+      res.sendStatus(404)
+    } else {
+      res.json(rfm)
+    }
+
+  } catch (error) {
+    next(error)
+  }
+})

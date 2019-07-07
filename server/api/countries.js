@@ -14,8 +14,6 @@ router.get('/', async (req,res,next) => {
 router.get(`/:paisId`, async (req, res, next) => {
   const { paisId } = req.params
 
-  console.log('paisId:', paisId)
-
   try {
     const pais = await Country.findByPk(paisId)
 

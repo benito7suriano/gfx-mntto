@@ -4,7 +4,7 @@ const app = require('../server')
 
 const port = process.env.PORT || 8080
 
-db.sync({ force: true })
+db.sync()
   .then(() => {
     console.log(green('DB sync\'d!!'))
 

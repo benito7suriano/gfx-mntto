@@ -168,7 +168,7 @@ const seed = async () => {
     brand: 'Haisi',
     model: '3" and 4" C-Channel RFM',
     contract: '9',
-    centerId: ces.id
+    centerId: brb.id
   })
 
   const forklifts = []

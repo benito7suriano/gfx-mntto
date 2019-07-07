@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const app = express()
 module.exports = app
 
@@ -6,7 +7,7 @@ module.exports = app
 app.use(require('./middleware'))
 
 // api routes
-// app.use('/api', require('./api'))
+app.use('/api', require('./api'))
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'))
