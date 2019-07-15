@@ -10,7 +10,6 @@ const Country = db.define('country', {
     type: Sequelize.STRING,
     allowNull: false
   }
-
 })
 
 module.exports = Country

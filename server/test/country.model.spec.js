@@ -22,8 +22,5 @@ describe('Country model', () => {
       await expect(Country.create('')).to.be.rejected
       await expect(Country.create({ a: '1' })).to.be.rejected
     })
-
   })
-
-
 })

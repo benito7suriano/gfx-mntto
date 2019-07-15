@@ -22,7 +22,9 @@ const Center = db.define('center', {
   },
   email: {
     type: Sequelize.STRING,
-    isEmail: true
+    validate: {
+      isEmail: true
+    }
   },
   imageUrl: {
     type: Sequelize.STRING,
