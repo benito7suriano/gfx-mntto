@@ -12,4 +12,5 @@ const Country = db.define('country', {
   }
 
 })
+
 module.exports = Country
