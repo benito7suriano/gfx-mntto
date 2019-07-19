@@ -1,4 +1,4 @@
-const { db, Forklift } = require('../db/models')
+const { db, Forklift } = require('../../db/models')
 const chai = require('chai')
 const { expect } = require('chai')
 

@@ -9,8 +9,8 @@ module.exports = router
 router.use(morgan('dev'))
 
 // body-parsing middleware
-router.use(bodyParser.json())
-router.use(bodyParser.urlencoded({ extended: true }))
+router.use(express.json())
+router.use(express.urlencoded({ extended: true }))
 
 // static middleware
 router.use(express.static(path.join(__dirname,'../../public')))

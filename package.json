@@ -6,7 +6,7 @@
   "scripts": {
     "start-server": "nodemon server/main.js",
     "seed": "node ./bin/seed.js",
-    "test:server": "mocha ./server/test -w"
+    "test:server": "mocha ./server/test/route -w"
   },
   "author": "Benito J. Suriano",
   "license": "ISC",
@@ -31,6 +31,7 @@
     "morgan": "^1.9.1",
     "nodemon": "^1.19.1",
     "path": "^0.12.7",
+    "supertest": "^4.0.2",
     "webpack": "^4.35.2",
     "webpack-cli": "^3.3.5"
   }

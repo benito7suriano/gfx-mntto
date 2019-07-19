@@ -1,4 +1,4 @@
-const { db, RollformerRoof } = require('../db/models')
+const { db, RollformerRoof } = require('../../db/models')
 const chai = require('chai')
 const { expect } = require('chai')
 
