@@ -1,7 +1,7 @@
 const { expect } = require('chai')
 const request = require('supertest')
 const app = require('../../index')
-const { Country } = require('../../db')
+const { Country } = require('../../db/models')
 
 describe('Country routes', () => {
   before('Sync latest model on db', () => Country.sync({ force: true }))
@@ -58,6 +58,31 @@ describe('Country routes', () => {
       })
 
       expect(ecuador).to.exist
+    })
+  })
+
+  describe('PUT /api/paises/:paisId', () => {
+    it('responds with a 204 and updates the correct country', async () => {
+      const paises = [
+        Country.create({id: 7, code: '7000', name: 'Peru'}),
+        Country.create({id: 8, code: '8000', name: 'Chili'})
+      ]
+
+      await Promise.all(paises)
+
+      await request(app)
+      .put('/api/paises/8')
+      .send({ name: 'Chile' })
+      .set('Accept', 'application/json')
+      .expect(204)
+
+       const correctedChile = await Country.findOne({
+         where: {
+           id: 8
+         }
+       })
+
+       expect(correctedChile.name).to.equal('Chile')
     })
   })
 })

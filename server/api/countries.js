@@ -42,3 +42,22 @@ router.post('/', async(req, res, next) => {
     next(error)
   }
 })
+
+// PUT /api/paises/:countryId
+router.put('/:countryId', async(req, res, next) => {
+  const { countryId } = req.params
+
+  try {
+    const country = await Country.findOne({
+      where: {
+        id: +countryId
+      }
+    })
+
+    await country.update(req.body)
+    res.send(204).end()
+
+  } catch (error) {
+    next(error)
+  }
+})
