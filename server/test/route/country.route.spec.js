@@ -61,7 +61,7 @@ describe('Country routes', () => {
     })
   })
 
-  describe('PUT /api/paises/:paisId', () => {
+  describe('PUT /api/paises/:countryId', () => {
     it('responds with a 204 and updates the correct country', async () => {
       const paises = [
         Country.create({id: 7, code: '7000', name: 'Peru'}),
@@ -83,6 +83,22 @@ describe('Country routes', () => {
        })
 
        expect(correctedChile.name).to.equal('Chile')
+    })
+  })
+
+  describe('DELETE /api/paises/:countryId', () => {
+    it('deletes a country and responds with a 204', async () => {
+      const countries = [
+        Country.create({id: 1, code: '1000', name: 'ESA'}),
+        Country.create({id: 2, code: '2000', name: 'HON'}),
+        Country.create({id: 3, code: '3000', name: 'GUA'})
+      ]
+
+      await Promise.all(countries)
+
+      await request(app)
+        .delete('/api/paises/2')
+        .expect(204)
     })
   })
 })

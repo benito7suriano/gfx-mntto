@@ -61,3 +61,22 @@ router.put('/:countryId', async(req, res, next) => {
     next(error)
   }
 })
+
+// DELETE /api/paises/:countryId
+router.delete('/:countryId', async(req, res, next) => {
+  const { countryId } = req.params
+
+  try {
+
+    await Country.destroy({
+      where: {
+        id: countryId
+      }
+    })
+
+    res.send(204).end()
+
+  } catch (error) {
+    next(error)
+  }
+})
