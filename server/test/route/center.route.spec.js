@@ -156,5 +156,34 @@ describe('Center routes', () => {
     })
   })
 
+  describe('POST /api/centros', () => {
+    before('Truncate latest model on db', async () => {
+      await Machine.sync({ force: true })
+      await Center.sync({ force: true })
+      await Machine.truncate()
+      await Center.truncate()
+    })
 
+    it('responds with a 201 and creates the new center', async () => {
+      const ghiCreate = {
+        code: '1003',
+        name: 'GHI',
+        zone: 'East'
+      }
+
+      await request(app)
+        .post(`/api/centros`)
+        .send(ghiCreate)
+        .expect(201)
+
+      const ghi = await Center.findOne({
+        where: {
+          name: 'GHI'
+        }
+      })
+
+      expect(ghi).to.exist
+      expect(ghi.code).to.equal('1003')
+    })
+  })
 })

@@ -54,3 +54,14 @@ router.get(`/:centerId`, async (req, res, next) => {
   }
 })
 
+// POST /api/centros/
+router.post(`/`, async (req, res, next) => {
+  const newCenter = req.body
+  try {
+    await Center.create(newCenter)
+    res.sendStatus(201)
+
+  } catch (error) {
+    next(error)
+  }
+})
