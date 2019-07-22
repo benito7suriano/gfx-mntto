@@ -1,13 +1,9 @@
 const Country = require('./Country')
 const Center = require('./Center')
-const RollformerRoof = require('./RollformerRoof')
-const RollformerGHT = require('./RollformerGHT')
-const Forklift = require('./Forklift')
+const Machine = require('./Machine')
 
 module.exports = {
   Country,
   Center,
-  RollformerRoof,
-  RollformerGHT,
-  Forklift
+  Machine
 }

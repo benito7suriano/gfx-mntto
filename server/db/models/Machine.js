@@ -1,12 +1,16 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Forklift = db.define('forklift', {
+const Machine = db.define('machine', {
   code: {
     type: Sequelize.STRING,
     allowNull: false
   },
   name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  type: {
     type: Sequelize.STRING,
     allowNull: false
   },
@@ -23,4 +27,5 @@ const Forklift = db.define('forklift', {
   }
 })
 
-module.exports = Forklift
+module.exports = Machine
+

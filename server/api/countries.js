@@ -36,7 +36,7 @@ router.post('/', async(req, res, next) => {
   try {
     const country = await Country.create(newCountry)
 
-    res.status(201).json(country)
+    res.sendStatus(201)
 
   } catch (error) {
     next(error)
@@ -55,7 +55,7 @@ router.put('/:countryId', async(req, res, next) => {
     })
 
     await country.update(req.body)
-    res.send(204).end()
+    res.sendStatus(204).end()
 
   } catch (error) {
     next(error)
@@ -74,7 +74,7 @@ router.delete('/:countryId', async(req, res, next) => {
       }
     })
 
-    res.send(204).end()
+    res.sendStatus(204).end()
 
   } catch (error) {
     next(error)

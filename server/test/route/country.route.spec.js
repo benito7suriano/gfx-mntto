@@ -26,7 +26,7 @@ describe('Country routes', () => {
     })
   })
 
-  describe('GET /api/paises/:paisId', () => {
+  describe('GET /api/paises/:countryId', () => {
     it('responds with a 200 with the correct country from db', async () => {
       const countries = await Country.create({ id: 1, code: '1000', name: 'El Salvador' })
 

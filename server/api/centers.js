@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Center, RollformerRoof, RollformerGHT, Forklift } = require('../db')
+const { Center, Machine } = require('../db')
 module.exports = router
 
 // GET /api/centros
@@ -27,18 +27,18 @@ router.get(`/:centroId`, async (req, res, next) => {
   }
 })
 
-// GET /api/centers/:centerId/roof-rollformer
-router.get(`/:centerId/roof-rollformer`, async (req, res, next) => {
+// GET /api/centers/:centerId/machines
+router.get(`/:centerId/machines`, async (req, res, next) => {
   const { centerId } = req.params
 
   try {
-    const rfm = await RollformerRoof.findOne({
+    const rfm = await Machine.findAll({
       where: {
-        centerId: centerId
+        centerId
       },
-      include: [{
-        model: Center
-      }]
+      include: [
+        { model: Center }
+      ]
     })
 
     if(!rfm) {
@@ -52,52 +52,3 @@ router.get(`/:centerId/roof-rollformer`, async (req, res, next) => {
   }
 })
 
-// GET /api/centers/:centerId/roof-rollformer
-router.get(`/:centerId/ght-rollformer`, async (req, res, next) => {
-  const { centerId } = req.params
-
-  try {
-    const rfm = await RollformerGHT.findOne({
-      where: {
-        centerId: centerId
-      },
-      include: [{
-        model: Center
-      }]
-    })
-
-    if(!rfm) {
-      res.sendStatus(404)
-    } else {
-      res.json(rfm)
-    }
-
-  } catch (error) {
-    next(error)
-  }
-})
-
-// GET /api/centers/:centerId/forklift
-router.get(`/:centerId/forklift`, async (req, res, next) => {
-  const { centerId } = req.params
-
-  try {
-    const rfm = await Forklift.findOne({
-      where: {
-        centerId: centerId
-      },
-      include: [{
-        model: Center
-      }]
-    })
-
-    if(!rfm) {
-      res.sendStatus(404)
-    } else {
-      res.json(rfm)
-    }
-
-  } catch (error) {
-    next(error)
-  }
-})

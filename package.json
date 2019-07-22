@@ -6,7 +6,7 @@
   "scripts": {
     "start-server": "nodemon server/main.js",
     "seed": "node ./bin/seed.js",
-    "test:server": "mocha ./server/test/route -w"
+    "test:server": "mocha ./server/test/route/**.spec.js -w"
   },
   "author": "Benito J. Suriano",
   "license": "ISC",
