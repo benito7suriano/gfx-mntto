@@ -31,8 +31,6 @@ router.get(`/:paisId`, async (req, res, next) => {
 router.post('/', async(req, res, next) => {
   const newCountry = req.body
 
-  console.log(req.body)
-
   try {
     const country = await Country.create(newCountry)
 

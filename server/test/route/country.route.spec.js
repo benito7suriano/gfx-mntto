@@ -27,7 +27,9 @@ describe('Country routes', () => {
   })
 
   describe('GET /api/paises/:countryId', () => {
+
     it('responds with a 200 with the correct country from db', async () => {
+
       const countries = await Country.create({ id: 1, code: '1000', name: 'El Salvador' })
 
       await request(app)
@@ -36,6 +38,14 @@ describe('Country routes', () => {
         .then(res => {
           expect(res.body.name).to.equal(countries.name)
         })
+    })
+
+    it('responds with a 404 if the specified country is not found', async () => {
+      const countries = await Country.create({ id: 1, code: '1000', name: 'El Salvador' })
+
+      await request(app)
+        .get(`/api/paises/12`)
+        .expect(404)
     })
   })
 

@@ -10,28 +10,13 @@ router.get('/', async (req,res,next) => {
   } catch (error) { next(err) }
 })
 
-// GET /api/centros/:centroId
-router.get(`/:centroId`, async (req, res, next) => {
-  const { centroId } = req.params
-
-  try {
-    const center = await Center.findByPk(centroId)
-
-    if(!center) {
-      res.sendStatus(404)
-    } else {
-      res.json(center)
-    }
-  } catch (error) {
-    next(error)
-  }
-})
-
 // GET /api/centers/:centerId/machines
 router.get(`/:centerId/machines`, async (req, res, next) => {
   const { centerId } = req.params
 
   try {
+    const center = await Center.findByPk(centerId)
+
     const rfm = await Machine.findAll({
       where: {
         centerId
@@ -41,12 +26,29 @@ router.get(`/:centerId/machines`, async (req, res, next) => {
       ]
     })
 
-    if(!rfm) {
+    if (!center) {
       res.sendStatus(404)
     } else {
       res.json(rfm)
     }
 
+  } catch (error) {
+    next(error)
+  }
+})
+
+// GET /api/centros/:centerId
+router.get(`/:centerId`, async (req, res, next) => {
+  const { centerId } = req.params
+
+  try {
+    const center = await Center.findByPk(centerId)
+
+    if (!center) {
+      res.sendStatus(404)
+    } else {
+      res.json(center)
+    }
   } catch (error) {
     next(error)
   }

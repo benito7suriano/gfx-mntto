@@ -66,6 +66,19 @@ describe('Center routes', () => {
           expect(res.body.name).to.equal(center.name)
         })
     })
+
+    it('responds with a 404 if the specified center is not found', async () => {
+      const center = await Center.create({
+        id: 2,
+        code: '1002',
+        name: 'DEF',
+        zone: 'Central'
+      })
+
+      await request(app)
+        .get(`/api/centros/12`)
+        .expect(404)
+    })
   })
 
   describe('GET /api/centros/:centerId/machines', () => {
@@ -118,5 +131,30 @@ describe('Center routes', () => {
           expect(machines[1].center.name).to.equal('ABC')
         })
     })
+
+    it('returns a 404 if the specified center is not found', async () => {
+      const center = await Center.create({
+        id: 2,
+        code: '1002',
+        name: 'DEF',
+        zone: 'Center',
+      })
+
+      const rfm = await Machine.create({
+        code: '111111',
+        type: 'roll former',
+        name: 'Roof Example Former',
+        brand: 'Brand',
+        model: 'Model T'
+      })
+
+      rfm.setCenter(center)
+
+      await request(app)
+        .get(`/api/centros/12000/machines`)
+        .expect(404)
+    })
   })
+
+
 })
