@@ -186,4 +186,87 @@ describe('Center routes', () => {
       expect(ghi.code).to.equal('1003')
     })
   })
+
+  describe('PUT /api/centros/:centerId', () => {
+    before('Clean up data on db', () => {
+      Center.truncate()
+    })
+
+    it('responds with a 204 and updates the correct center', async () => {
+      const centers = [
+        Center.create({
+          id: 1,
+          code: '1001',
+          name: 'ABC',
+          zone: 'Central'
+        }),
+        Center.create({
+          id: 2,
+          code: '1002',
+          name: 'DEF',
+          zone: 'West'
+        }),
+        Center.create({
+          id: 3,
+          code: '1003',
+          name: 'XYZ',
+          zone: 'East'
+        })
+      ]
+
+      await Promise.all(centers)
+
+      await request(app)
+        .put(`/api/centros/3`)
+        .send({zone: 'South'})
+        .set('Accept', 'application/json')
+        .expect(204)
+
+      const changedCenter = await Center.findOne({
+        where: {
+          zone: 'South'
+        }
+      })
+
+      expect(changedCenter).to.exist
+      expect(changedCenter.name).to.equal('XYZ')
+    })
+  })
+
+  describe('DELETE /api/centros/:centerId', () => {
+    before('Clean up data', () => Center.truncate())
+
+    it('DELETEs the specified center from db', async () => {
+      const centers = [
+        Center.create({
+          id: 1,
+          code: '1001',
+          name: 'ABC',
+          zone: 'Central'
+        }),
+        Center.create({
+          id: 2,
+          code: '1002',
+          name: 'DEF',
+          zone: 'West'
+        }),
+        Center.create({
+          id: 3,
+          code: '1003',
+          name: 'XYZ',
+          zone: 'East'
+        })
+      ]
+
+      await Promise.all(centers)
+
+      await request(app)
+        .delete(`/api/centros/2`)
+        .expect(204)
+
+      const remaining = await Center.findAll()
+
+      expect(remaining.length).to.equal(2)
+    })
+  })
 })

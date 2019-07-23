@@ -65,3 +65,36 @@ router.post(`/`, async (req, res, next) => {
     next(error)
   }
 })
+
+// PUT /api/centros/:centerId
+router.put('/:centerId', async (req, res, next) => {
+  const { centerId } = req.params
+
+  try {
+    const toChange = await Center.findByPk(+centerId)
+
+    await toChange.update(req.body)
+
+    res.sendStatus(204).end()
+
+  } catch (error) {
+    next(error)
+  }
+})
+
+// DELETE /api/centros/:centerId
+router.delete('/:centerId', async (req, res, next) => {
+  const { centerId } = req.params
+
+  try {
+    await Center.destroy({
+      where: {
+        id: centerId
+      }
+    })
+
+    res.sendStatus(204).end()
+  } catch (error) {
+    next(error)
+  }
+})
