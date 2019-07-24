@@ -1,21 +1,21 @@
 const router = require('express').Router()
-const { RollformerRoof } = require('../db')
+const { Machine } = require('../db')
 module.exports = router
 
-// GET /api/techos-maquinas
+// GET /api/machines
 router.get('/', async (req,res,next) => {
   try {
-    const rfm = await RollformerRoof.findAll()
+    const rfm = await Machine.findAll()
     res.json(rfm)
-  } catch (error) { next(err) }
+  } catch (error) { next(error) }
 })
 
-// GET /api/techos-maquinas/:mqId
+// GET /api/machines/:mqId
 router.get(`/:mqId`, async (req, res, next) => {
   const { mqId } = req.params
 
   try {
-    const rfm = await RollformerRoof.findByPk(mqId)
+    const rfm = await Machine.findByPk(mqId)
 
     if(!rfm) {
       res.sendStatus(404)
@@ -26,3 +26,5 @@ router.get(`/:mqId`, async (req, res, next) => {
     next(error)
   }
 })
+
+
