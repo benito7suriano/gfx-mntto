@@ -27,4 +27,15 @@ router.get(`/:mqId`, async (req, res, next) => {
   }
 })
 
+// POST /api/machines
+router.post(`/`, async (req, res, next) => {
+  const newMachine = req.body
 
+  try {
+    await Machine.create(newMachine)
+    res.sendStatus(201)
+
+  } catch (error) {
+    next(error)
+  }
+})

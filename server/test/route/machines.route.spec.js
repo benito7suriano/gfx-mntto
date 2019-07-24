@@ -103,4 +103,29 @@ describe('Machines routes', () => {
         })
     })
   })
+
+  describe('POST /api/machines', () => {
+    it('creates a new machine on db.', async () => {
+      const newMachine = {
+        code: '3400004',
+        name: 'machine_4',
+        type: 'type_4',
+        brand: 'brand',
+        model: 'model4'
+      }
+
+      await request(app)
+        .post(`/api/machines`)
+        .send(newMachine)
+        .expect(201)
+
+      const created = Machine.findOne({
+        where: {
+          code: '3400004'
+        }
+      })
+
+      expect(created).to.exist
+    })
+  })
 })
