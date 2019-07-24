@@ -128,4 +128,36 @@ describe('Machines routes', () => {
       expect(created).to.exist
     })
   })
+
+  describe('PUT /api/machines/:mqId', () => {
+    it('updates an already existent machine on db', async () => {
+      const machines = [
+        Machine.create({
+          id: 1,
+          code: '1',
+          name: 'machine_1',
+          brand: 'brandA',
+          model: 'modelT',
+          type: 'machinery'
+        }),
+        Machine.create({
+          id: 2,
+          code: '2',
+          name: 'machine_2',
+          brand: 'brandA',
+          model: 'modelT',
+          type: 'machinery'
+        })
+      ]
+
+      await request(app)
+        .put(`/api/machines/2`)
+        .send({model: 'modelX'})
+        .expect(204)
+
+      const updated = await Machine.findByPk(2)
+
+      expect(updated.model).to.equal('modelX')
+    })
+  })
 })

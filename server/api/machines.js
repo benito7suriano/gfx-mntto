@@ -39,3 +39,22 @@ router.post(`/`, async (req, res, next) => {
     next(error)
   }
 })
+
+// PUT /api/machines/:mqId
+router.put('/:mqId', async (req, res, next) => {
+  const { mqId } = req.params
+
+  try {
+    const toUpdate = await Machine.findOne({
+      where: {
+        id: +mqId
+      }
+    })
+
+    await toUpdate.update(req.body)
+    res.sendStatus(204).end()
+
+  } catch (error) {
+    next(error)
+  }
+})
