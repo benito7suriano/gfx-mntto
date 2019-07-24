@@ -160,4 +160,24 @@ describe('Machines routes', () => {
       expect(updated.model).to.equal('modelX')
     })
   })
+
+  describe('DELETE /api/machines/:mqId', () => {
+    it('deletes specified machine from db', async () => {
+      const machine = {
+        id: 1,
+        code: '1',
+        name: 'machine_1',
+        brand: 'brandA',
+        model: 'modelX',
+        type: 'machinery'
+      }
+
+      await Machine.create(machine)
+
+      await request(app)
+        .delete(`/api/machines/1`)
+        .expect(204)
+
+    })
+  })
 })

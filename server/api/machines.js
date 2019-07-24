@@ -58,3 +58,21 @@ router.put('/:mqId', async (req, res, next) => {
     next(error)
   }
 })
+
+// DELETE /api/machines/:mqId
+router.delete('/:mqId', async (req, res, next) => {
+  const { mqId } = req.params
+
+  try {
+    await Machine.destroy({
+      where: {
+        id: +mqId
+      }
+    })
+
+    res.sendStatus(204).end()
+
+  } catch (error) {
+    next(error)
+  }
+})
