@@ -150,6 +150,8 @@ describe('Machines routes', () => {
         })
       ]
 
+      await Promise.all(machines)
+
       await request(app)
         .put(`/api/machines/2`)
         .send({model: 'modelX'})
