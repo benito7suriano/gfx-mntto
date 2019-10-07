@@ -10,7 +10,7 @@ Center.belongsTo(Country)
 Country.hasMany(Center)
 
 Machine.belongsTo(Center)
-Center.hasOne(Machine)
+Center.hasMany(Machine)
 
 module.exports = {
   db,

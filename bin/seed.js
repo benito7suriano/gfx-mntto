@@ -86,7 +86,7 @@ const seed = async () => {
   /**
    * Associations --->
    * Machine.belongsTo(Center)
-   * Center.hasOne(Machine)
+   * Center.hasMany(Machine)
    */
 
   await Machine.create({
